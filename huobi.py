@@ -15,7 +15,7 @@ if __name__ == '__main__':
             time.sleep(5)
 
     # 订阅 KLine 数据
-    tradeStr="""{"sub": "market.htusdt.kline.1min","id": "id10"}"""
+    # tradeStr="""{"sub": "market.htusdt.kline.1min","id": "id10"}"""
 
     # 请求 KLine 数据
     # tradeStr="""{"req": "market.ethusdt.kline.1min","id": "id10", "from": 1513391453, "to": 1513392453}"""
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     # tradeStr="""{"req": "market.ethusdt.depth.step5", "id": "id10"}"""
 
     #订阅 Trade Detail 数据
-    # tradeStr="""{"sub": "market.ethusdt.trade.detail", "id": "id10"}"""
+    tradeStr="""{"sub": "market.btcusdt.trade.detail", "id": "id10"}"""
 
     #请求 Trade Detail 数据
     # tradeStr="""{"req": "market.ethusdt.trade.detail", "id": "id10"}"""
@@ -36,6 +36,7 @@ if __name__ == '__main__':
     # tradeStr="""{"req": "market.ethusdt.detail", "id": "id12"}"""
 
     ws.send(tradeStr)
+    trade_id = ''
     while(1):
         compressData=ws.recv()
         result=gzip.decompress(compressData).decode('utf-8')
@@ -45,6 +46,15 @@ if __name__ == '__main__':
             ws.send(pong)
             ws.send(tradeStr)
         else:
+            try:
+                if trade_id == result['data']['id']:
+                    print('重复的id')
+                    break
+                else:
+                    trade_id = result['data']['id']
+            except Exception:
+                pass
+
             print(result)
 
     
