@@ -8,7 +8,7 @@ import time
 if __name__ == '__main__':
     while(1):
         try:
-            ws = create_connection("wss://api.huobipro.com/ws")
+            ws = create_connection("wss://api.huobi.pro/ws")
             break
         except:
             print('connect ws error,retry...')
