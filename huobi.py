@@ -44,7 +44,7 @@ if __name__ == '__main__':
             ts=result[8:21]
             pong='{"pong":'+ts+'}'
             ws.send(pong)
-            ws.send(tradeStr)
+            # ws.send(tradeStr)
         else:
             try:
                 if trade_id == result['data']['id']:
