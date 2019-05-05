@@ -4,6 +4,7 @@
 from websocket import create_connection
 import gzip
 import time
+import json
 
 if __name__ == '__main__':
     while(1):
@@ -46,15 +47,6 @@ if __name__ == '__main__':
             ws.send(pong)
             # ws.send(tradeStr)
         else:
-            try:
-                if trade_id == result['data']['id']:
-                    print('重复的id')
-                    break
-                else:
-                    trade_id = result['data']['id']
-            except Exception:
-                pass
-
-            print(result)
+            print(json.loads(result))
 
     
